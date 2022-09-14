@@ -16,14 +16,9 @@
 
 package com.netflix.graphql.dgs.internal
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.netflix.graphql.dgs.internal.utils.TimeTracer
 import graphql.ExecutionResult
 import graphql.ExecutionResultImpl
 import graphql.GraphQLError
-import graphql.GraphqlErrorBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
@@ -94,43 +89,26 @@ class DgsExecutionResult @JvmOverloads constructor(
         }
     }
 
-    fun toSpringResponse(
-        mapper: ObjectMapper = jacksonObjectMapper()
-    ): ResponseEntity<Any> {
-        val result = try {
-            TimeTracer.logTime(
-                { mapper.writeValueAsBytes(this.toSpecification()) },
-                logger,
-                "Serialized JSON result in {}ms"
-            )
-        } catch (ex: InvalidDefinitionException) {
-            val errorMessage = "Error serializing response: ${ex.message}"
-            val errorResponse = ExecutionResultImpl(GraphqlErrorBuilder.newError().message(errorMessage).build())
-            logger.error(errorMessage, ex)
-            mapper.writeValueAsBytes(errorResponse.toSpecification())
-        }
-
+    fun toSpringResponse(): ResponseEntity<Any> {
         return ResponseEntity(
-            result,
+            toSpecification(),
             headers,
             status
         )
     }
 
-    // overridden for compatibility with https://github.com/Netflix/dgs-framework/pull/1261.
+    // Overridden for compatibility with https://github.com/Netflix/dgs-framework/pull/1261.
     override fun toSpecification(): MutableMap<String, Any> {
         val spec = executionResult.toSpecification()
 
         if (spec["extensions"] != null && extensions.containsKey(DGS_RESPONSE_HEADERS_KEY)) {
             val extensions = spec["extensions"] as Map<*, *>
-
             if (extensions.size != 1) {
                 spec["extensions"] = extensions.minus(DGS_RESPONSE_HEADERS_KEY)
             } else {
                 spec.remove("extensions")
             }
         }
-
         return spec
     }
 }
