@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.netflix.graphql.dgs.example.shared.dataLoader;
+package com.netflix.graphql.dgs.example.shared.dataloader;
 
 import com.netflix.graphql.dgs.DgsDataLoader;
 import com.netflix.graphql.dgs.context.DgsContext;
@@ -35,7 +35,7 @@ public class MessagesDataLoaderWithException implements BatchLoaderWithContext<S
         MyContext context = DgsContext.getCustomContext(environment);
         return CompletableFuture.supplyAsync(() -> keys.stream()
                 .map(key -> Try.tryCall(() -> {
-                    if (key.equals("A")) {
+                    if ("A".equals(key)) {
                         throw new RuntimeException("Invalid key");
                     }
                     return  context.getCustomState() + " " + key;
