@@ -42,7 +42,7 @@ public class ExampleApp {
 
 
         @Bean
-        public PreparsedDocumentProvider preparsedDocumentProvider() {
+        PreparsedDocumentProvider preparsedDocumentProvider() {
             return (executionInput, parseAndValidateFunction) -> {
                 Function<String, PreparsedDocumentEntry> mapCompute = key -> parseAndValidateFunction.apply(executionInput);
                 return cache.get(executionInput.getQuery(), mapCompute);

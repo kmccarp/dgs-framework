@@ -8,6 +8,20 @@ management:
       exposure:
         include:
           - metrics
+    jmx:
+      exposure:
+        # In Spring Boot 3.0 only the health endpoint is exposed over JMX. This setting was changed to maintain parity with Spring Boot 2.x but should be reviewed.
+        include: "*"
+  endpoint:
+    configprops:
+      # This value was added to maintain parity with SpringBoot 2.x and should be changed to either to "NEVER" or "WHEN_AUTHORIZED".
+      show-values: ALWAYS
+    env:
+      # This value was added to maintain parity with SpringBoot 2.x and should be changed to either to "NEVER" or "WHEN_AUTHORIZED".
+      show-values: ALWAYS
+    quartz:
+      # This value was added to maintain parity with SpringBoot 2.x and should be changed to either to "NEVER" or "WHEN_AUTHORIZED".
+      show-values: ALWAYS
 
 logging:
   level:
