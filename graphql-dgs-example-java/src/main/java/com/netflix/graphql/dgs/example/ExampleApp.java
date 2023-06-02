@@ -38,7 +38,7 @@ public class ExampleApp {
     static class PreparsedDocumentProviderConfig {
 
         private final Cache<String, PreparsedDocumentEntry> cache = Caffeine.newBuilder().maximumSize(250)
-                .expireAfterAccess(5,TimeUnit.MINUTES).recordStats().build();
+                .expireAfterAccess(5, TimeUnit.MINUTES).recordStats().build();
 
 
         @Bean

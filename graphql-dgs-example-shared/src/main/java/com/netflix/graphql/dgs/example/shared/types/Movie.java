@@ -17,11 +17,11 @@
 package com.netflix.graphql.dgs.example.shared.types;
 
 public interface Movie {
-  String getTitle();
+    String getTitle();
 
-  void setTitle(String setTitle);
+    void setTitle(String setTitle);
 
-  String getDirector();
+    String getDirector();
 
-  void setDirector(String setDirector);
+    void setDirector(String setDirector);
 }

@@ -19,7 +19,7 @@ package com.netflix.graphql.dgs.internal.java.test.inputobjects;
 import java.util.Map;
 
 public class JInputObjectWithMap {
-    private Map<String,Object> json;
+    private Map<String, Object> json;
 
     public Map<String, Object> getJson() {
         return json;

@@ -29,7 +29,7 @@ import static java.lang.annotation.ElementType.*;
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
+@Target(value = {CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
 public @interface Unstable {
     String message()     default "The API/implementation of this component is unstable, use at your own risk.";
 }

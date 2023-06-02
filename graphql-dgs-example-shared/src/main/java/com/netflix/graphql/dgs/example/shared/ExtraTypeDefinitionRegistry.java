@@ -34,7 +34,6 @@ public class ExtraTypeDefinitionRegistry {
         typeDefinitionRegistry.add(objectTypeExtensionDefinition);
 
 
-
         return typeDefinitionRegistry;
     }
 }

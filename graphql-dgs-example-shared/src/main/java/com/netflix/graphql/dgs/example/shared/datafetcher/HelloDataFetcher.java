@@ -56,7 +56,7 @@ public class HelloDataFetcher {
     @DgsData(parentType = "Query", field = "messageFromBatchLoaderWithScheduledDispatch")
     public CompletableFuture<String> getMessageScheduled(DataFetchingEnvironment env) {
         DataLoader<String, String> dataLoader = env.getDataLoader("messagesWithScheduledDispatch");
-        CompletableFuture res =  dataLoader.load("a");
+        CompletableFuture res = dataLoader.load("a");
 
         return res;
     }
@@ -109,6 +109,6 @@ public class HelloDataFetcher {
 
     @DgsData(parentType = "Query", field = "withPagination")
     public Connection<Message> withPagination(DataFetchingEnvironment env) {
-       return new SimpleListConnection<>(Collections.singletonList(new Message("This is a generated connection"))).get(env);
+        return new SimpleListConnection<>(Collections.singletonList(new Message("This is a generated connection"))).get(env);
     }
 }

@@ -41,10 +41,10 @@ public class TypedGraphQLError implements GraphQLError {
 
     @JsonCreator
     public TypedGraphQLError(@JsonProperty("message") String message,
-                             @JsonProperty("locations") List<SourceLocation> locations,
-                             @JsonProperty("classification") ErrorClassification classification,
-                             @JsonProperty("path") List<Object> path,
-                             @JsonProperty("extensions") Map<String, Object> extensions) {
+            @JsonProperty("locations") List<SourceLocation> locations,
+            @JsonProperty("classification") ErrorClassification classification,
+            @JsonProperty("path") List<Object> path,
+            @JsonProperty("extensions") Map<String, Object> extensions) {
         this.message = message;
         this.locations = locations;
         this.classification = classification;
@@ -256,7 +256,7 @@ public class TypedGraphQLError implements GraphQLError {
         if (obj == null) return false;
         if (obj.getClass() != this.getClass()) return false;
 
-        TypedGraphQLError e = (TypedGraphQLError)obj;
+        TypedGraphQLError e = (TypedGraphQLError) obj;
 
         if (!Objects.equals(message, e.message)) return false;
         if (!Objects.equals(locations, e.locations)) return false;

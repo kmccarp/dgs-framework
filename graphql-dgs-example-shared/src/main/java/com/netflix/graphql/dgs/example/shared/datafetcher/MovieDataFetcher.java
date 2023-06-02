@@ -33,8 +33,8 @@ public class MovieDataFetcher {
         List<Movie> movies = new ArrayList<>();
         movies.add(new ActionMovie("Crouching Tiger", null, 0));
         movies.add(new ActionMovie("Black hawk down", null, 10));
-        movies.add(new ScaryMovie("American Horror Story", null,true, 10));
-        movies.add(new ScaryMovie("Love Death + Robots",null, false, 4));
+        movies.add(new ScaryMovie("American Horror Story", null, true, 10));
+        movies.add(new ScaryMovie("Love Death + Robots", null, false, 4));
 
         return movies;
     }

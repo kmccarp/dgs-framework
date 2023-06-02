@@ -21,7 +21,8 @@ import java.util.Objects;
 public class JFilter {
     private Object query;
 
-    public JFilter() {}
+    public JFilter() {
+    }
 
     public JFilter(Object query) {
         this.query = query;

@@ -34,6 +34,7 @@ public class ExampleGraphQLContextContributor implements GraphQLContextContribut
     public static final String CONTRIBUTOR_ENABLED_CONTEXT_VALUE = "true";
     public static final String CONTEXT_CONTRIBUTOR_HEADER_NAME = "context-contributor-header";
     public static final String CONTEXT_CONTRIBUTOR_HEADER_VALUE = "enabled";
+
     @Override
     public void contribute(@NotNull GraphQLContext.Builder builder, @Nullable Map<String, ?> extensions, @Nullable DgsRequestData dgsRequestData) {
         builder.put("exampleGraphQLContextEnabled", "true");

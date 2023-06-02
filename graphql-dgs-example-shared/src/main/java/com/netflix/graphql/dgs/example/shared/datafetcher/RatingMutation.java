@@ -25,7 +25,7 @@ import com.netflix.graphql.dgs.example.shared.types.Rating;
 public class RatingMutation {
     @DgsData(parentType = "Mutation", field = "addRating")
     public Rating addRating(@InputArgument("input") RatingInput ratingInput) {
-        if(ratingInput.getStars() < 0) {
+        if (ratingInput.getStars() < 0) {
             throw new IllegalArgumentException("Stars must be 1-5");
         }
 

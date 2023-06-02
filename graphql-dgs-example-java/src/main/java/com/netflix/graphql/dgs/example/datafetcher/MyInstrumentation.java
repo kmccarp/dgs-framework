@@ -32,8 +32,8 @@ public class MyInstrumentation extends SimpleInstrumentation {
     @NotNull
     @Override
     public CompletableFuture<ExecutionResult> instrumentExecutionResult(ExecutionResult executionResult,
-                                                                        InstrumentationExecutionParameters parameters,
-                                                                        InstrumentationState state) {
+            InstrumentationExecutionParameters parameters,
+            InstrumentationState state) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("myHeader", "hello");
 

@@ -52,14 +52,14 @@ public class GraphQLResponseJavaTest {
     RequestExecutor requestExecutor = (url, headers, body) -> {
         HttpHeaders httpHeaders = new HttpHeaders();
         headers.forEach(httpHeaders::addAll);
-        ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(body, httpHeaders),String.class);
+        ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(body, httpHeaders), String.class);
         return new HttpResponse(exchange.getStatusCodeValue(), exchange.getBody());
     };
 
     RequestExecutor requestExecutorWithResponseHeaders = (url, headers, body) -> {
         HttpHeaders httpHeaders = new HttpHeaders();
         headers.forEach(httpHeaders::addAll);
-        ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(body, httpHeaders),String.class);
+        ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(body, httpHeaders), String.class);
         return new HttpResponse(exchange.getStatusCodeValue(), exchange.getBody(), exchange.getHeaders());
     };
 
@@ -84,20 +84,20 @@ public class GraphQLResponseJavaTest {
 
     @Test
     public void responseWithHeaders() {
-       String jsonResponse = "{" +
-             "\"data\": {" +
+        String jsonResponse = "{" +
+                "\"data\": {" +
                 "\"submitReview\": {" +
-                   "\"submittedBy\": \"abc@netflix.com\"" +
+                "\"submittedBy\": \"abc@netflix.com\"" +
                 "}" +
-              "}" +
-            "}";
+                "}" +
+                "}";
 
         server.expect(requestTo(url))
                 .andExpect(method(HttpMethod.POST))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andRespond(withSuccess(jsonResponse, MediaType.APPLICATION_JSON));
 
-       GraphQLResponse graphQLResponse = client.executeQuery(query, emptyMap(), requestExecutorWithResponseHeaders);
+        GraphQLResponse graphQLResponse = client.executeQuery(query, emptyMap(), requestExecutorWithResponseHeaders);
 
         String submittedBy = graphQLResponse.extractValueAsObject("submitReview.submittedBy", String.class);
         assert(submittedBy).contentEquals("abc@netflix.com");
@@ -131,7 +131,7 @@ public class GraphQLResponseJavaTest {
         CustomMonoGraphQLClient client = MonoGraphQLClient.createCustomReactive(url, (requestUrl, headers, body) -> {
             HttpHeaders httpHeaders = new HttpHeaders();
             headers.forEach(httpHeaders::addAll);
-            ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(body, httpHeaders),String.class);
+            ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(body, httpHeaders), String.class);
             return Mono.just(new HttpResponse(exchange.getStatusCodeValue(), exchange.getBody(), exchange.getHeaders()));
         });
         Mono<GraphQLResponse> graphQLResponse = client.reactiveExecuteQuery(query, emptyMap(), "SubmitReview");

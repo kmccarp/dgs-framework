@@ -64,8 +64,8 @@ class HelloDataFetcherTest {
         LocalDateTime now = LocalDateTime.now();
         String message = queryExecutor.executeAndExtractJsonPath("{ messageFromBatchLoaderWithScheduledDispatch }", "data.messageFromBatchLoaderWithScheduledDispatch");
         LocalDateTime after = LocalDateTime.now();
-        assertThat( now.until(after, ChronoUnit.SECONDS)).isGreaterThanOrEqualTo(2);
-        assertThat( now.until(after, ChronoUnit.SECONDS)).isLessThanOrEqualTo(4);
+        assertThat(now.until(after, ChronoUnit.SECONDS)).isGreaterThanOrEqualTo(2);
+        assertThat(now.until(after, ChronoUnit.SECONDS)).isLessThanOrEqualTo(4);
         assertThat(message).isEqualTo("hello, a!");
     }
 

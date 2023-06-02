@@ -16,5 +16,5 @@
 
 package com.netflix.graphql.dgs.internal.java.test.inputobjects;
 
-public class JGenericSubInputObject extends JGenericBaseInputObject<Integer>{
+public class JGenericSubInputObject extends JGenericBaseInputObject<Integer> {
 }
