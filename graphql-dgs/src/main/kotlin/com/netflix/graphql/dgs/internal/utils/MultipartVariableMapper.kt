@@ -32,9 +32,9 @@ import java.util.regex.Pattern
  * Transformed => "variables": { "input": { "description": "test", "files": [file1.txt, file2.txt] } }
  */
 object MultipartVariableMapper {
-    private val PERIOD = Pattern.compile("\\.")
+    private val period = Pattern.compile("\\.")
 
-    private val MAP_MAPPER = object : Mapper<MutableMap<String, Any>> {
+    private val mapMapper = object : Mapper<MutableMap<String, Any>> {
         override fun set(location: MutableMap<String, Any>, target: String, value: MultipartFile): Any? {
             return location.put(target, value)
         }
@@ -44,7 +44,7 @@ object MultipartVariableMapper {
         }
     }
 
-    private val LIST_MAPPER = object : Mapper<MutableList<Any>> {
+    private val listMapper = object : Mapper<MutableList<Any>> {
         override fun set(location: MutableList<Any>, target: String, value: MultipartFile): Any? {
             return location.set(Integer.parseInt(target), value)
         }
@@ -61,7 +61,7 @@ object MultipartVariableMapper {
 
     @Suppress("UNCHECKED_CAST")
     fun mapVariable(objectPath: String, variables: MutableMap<String, Any>, part: MultipartFile) {
-        val segments = PERIOD.split(objectPath)
+        val segments = period.split(objectPath)
 
         if (segments.size < 2) {
             throw VariableMappingException("object-path in map must have at least two segments")
@@ -74,19 +74,19 @@ object MultipartVariableMapper {
             val segmentName = segments[i]
             if (i == segments.size - 1) {
                 if (currentLocation is Map<*, *>) {
-                    if (null != MAP_MAPPER.set(currentLocation as MutableMap<String, Any>, segmentName, part)) {
+                    if (null != mapMapper.set(currentLocation as MutableMap<String, Any>, segmentName, part)) {
                         throw VariableMappingException("expected null value when mapping $objectPath")
                     }
                 } else {
-                    if (null != LIST_MAPPER.set(currentLocation as MutableList<Any>, segmentName, part)) {
+                    if (null != listMapper.set(currentLocation as MutableList<Any>, segmentName, part)) {
                         throw VariableMappingException("expected null value when mapping $objectPath")
                     }
                 }
             } else {
                 currentLocation = if (currentLocation is Map<*, *>) {
-                    MAP_MAPPER.recurse(currentLocation as MutableMap<String, Any>, segmentName)
+                    mapMapper.recurse(currentLocation as MutableMap<String, Any>, segmentName)
                 } else {
-                    LIST_MAPPER.recurse(currentLocation as MutableList<Any>, segmentName)
+                    listMapper.recurse(currentLocation as MutableList<Any>, segmentName)
                 }
             }
         }

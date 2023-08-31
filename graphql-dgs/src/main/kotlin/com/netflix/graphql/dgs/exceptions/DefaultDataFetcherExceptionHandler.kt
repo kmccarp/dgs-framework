@@ -66,7 +66,10 @@ class DefaultDataFetcherExceptionHandler : DataFetcherExceptionHandler {
     }
 
     private fun unwrapCompletionException(e: Throwable): Throwable {
-        return if (e is CompletionException && e.cause != null) e.cause!! else e
+        return if (e is CompletionException && e.cause != null) {
+            e.cause!!
+        } else { e
+        }
     }
 
     companion object {

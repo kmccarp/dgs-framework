@@ -89,7 +89,9 @@ open class WebsocketSubscriptionsGraphQLTransportWSTest(@param:LocalServerPort v
 
         StepVerifier.create(
             output.asFlux().map {
-                if (it.type == MessageType.NEXT) { (it as Message.NextMessage).payload.toString() } else (it as Message.ErrorMessage).payload.toString()
+                if (it.type == MessageType.NEXT) { (it as Message.NextMessage).payload.toString() } else {
+                    (it as Message.ErrorMessage).payload.toString()
+                }
             }
         )
             .expectNext("ExecutionResult(data={withError=1}, errors=[])")
