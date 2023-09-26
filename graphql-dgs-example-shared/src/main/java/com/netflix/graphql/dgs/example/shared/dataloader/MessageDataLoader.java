@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.netflix.graphql.dgs.example.shared.dataLoader;
+package com.netflix.graphql.dgs.example.shared.dataloader;
 
 import com.netflix.graphql.dgs.DgsDataLoader;
 import com.netflix.graphql.dgs.DgsDispatchPredicate;

@@ -60,9 +60,9 @@ def clone_repos(config, target):
     if not git_uris:
         Out.error("The repositories to clone are missing, make sure the config file defines a repos section.")
         exit(-2)
-    for g_uri in git_uris:
+    for gUri in git_uris:
         try:
-            cloned_repo = git.Git(target).clone(g_uri)
+            cloned_repo = git.Git(target).clone(gUri)
             if cloned_repo:
                 cloned_repos.append(cloned_repo)
                 Out.info(f"Repository [{g_uri}] cloned to [{target}].")
@@ -78,7 +78,7 @@ def infer_version():
     return match.group(1) if match else ""
 
 
-def infer_build_file(project_dir):
+def infer_build_file(projectDir):
     if os.path.isfile(f"{project_dir}/build.gradle.kts"):
         build_file = f"{project_dir}/build.gradle.kts"
     elif os.path.isfile(f"{project_dir}/build.gradle"):
@@ -105,23 +105,23 @@ def find_replace_version(content, version):
     return re.sub(regex, f"graphql-dgs-platform-dependencies:{version}", content)
 
 
-def update_build(build_file, version):
-    file = open(build_file, 'r')
+def update_build(buildFile, version):
+    file = open(buildFile, 'r')
     file_data = file.read()
     file.close()
 
     file_data = find_replace_version(file_data, version)
 
-    file = open(build_file, 'w')
+    file = open(buildFile, 'w')
     file.write(file_data)
     file.close()
 
 
-def run_example_build(project_dir, build_file="", settings_file=""):
+def run_example_build(project_dir, build_file="", settingsFile=""):
     command = [gradlew, "-p", project_dir, "-s", "-w", "--info", "--stacktrace"]
 
-    if settings_file:
-        command.extend(["-c", settings_file])
+    if settingsFile:
+        command.extend(["-c", settingsFile])
     else:
         Out.error(f"The project {project_dir} is missing a Gradle settings file!")
         sys.exit(2)
