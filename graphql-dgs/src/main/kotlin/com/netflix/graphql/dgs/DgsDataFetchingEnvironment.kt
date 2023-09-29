@@ -35,7 +35,9 @@ class DgsDataFetchingEnvironment(private val dfe: DataFetchingEnvironment) : Dat
             dfe.getDataLoader(DataLoaderNameUtil.getDataLoaderName(loaderClass, annotation))
         } else {
             val loaders = loaderClass.fields.filter { it.isAnnotationPresent(DgsDataLoader::class.java) }
-            if (loaders.size > 1) throw MultipleDataLoadersDefinedException(loaderClass)
+            if (loaders.size > 1) {
+                throw MultipleDataLoadersDefinedException(loaderClass)
+            }
             val loaderField: java.lang.reflect.Field = loaders
                 .firstOrNull() ?: throw NoDataLoaderFoundException(loaderClass)
             val theAnnotation = loaderField.getAnnotation(DgsDataLoader::class.java)

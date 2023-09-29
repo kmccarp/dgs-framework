@@ -45,7 +45,7 @@ import reactor.test.StepVerifier
 internal class SSESubscriptionGraphQLClientTest {
 
     @LocalServerPort
-    var port: Int? = null
+    var port: Int?
 
     @Test
     fun `A successful subscription should publish ticks`() {
