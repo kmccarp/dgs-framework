@@ -20,7 +20,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.server.ServerRequest
 
 object GraphQLMediaTypes {
-    private val GRAPHQL_MEDIA_TYPE = MediaType("application", "graphql")
+    private static val GRAPHQL_MEDIA_TYPE = MediaType("application", "graphql")
     val ACCEPTABLE_MEDIA_TYPES = listOf(GRAPHQL_MEDIA_TYPE, MediaType.APPLICATION_JSON)
 
     fun isApplicationGraphQL(request: ServerRequest): Boolean {

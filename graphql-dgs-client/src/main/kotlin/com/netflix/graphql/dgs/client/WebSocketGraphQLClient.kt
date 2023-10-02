@@ -122,7 +122,7 @@ class WebSocketGraphQLClient(
             )
     }
 
-    private fun connectionIsStale() = connection.get()?.isDisposed != false
+    private fun connectionIsStale() = connection.get()?.isDisposed
 
     private fun doHandshake(): Mono<Void> {
         return Mono.defer {

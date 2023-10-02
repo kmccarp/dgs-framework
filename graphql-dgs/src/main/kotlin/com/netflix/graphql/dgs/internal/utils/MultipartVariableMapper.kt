@@ -32,9 +32,9 @@ import java.util.regex.Pattern
  * Transformed => "variables": { "input": { "description": "test", "files": [file1.txt, file2.txt] } }
  */
 object MultipartVariableMapper {
-    private val PERIOD = Pattern.compile("\\.")
+    private static val PERIOD = Pattern.compile("\\.")
 
-    private val MAP_MAPPER = object : Mapper<MutableMap<String, Any>> {
+    private static val MAP_MAPPER = object : Mapper<MutableMap<String, Any>> {
         override fun set(location: MutableMap<String, Any>, target: String, value: MultipartFile): Any? {
             return location.put(target, value)
         }
@@ -44,7 +44,7 @@ object MultipartVariableMapper {
         }
     }
 
-    private val LIST_MAPPER = object : Mapper<MutableList<Any>> {
+    private static val LIST_MAPPER = object : Mapper<MutableList<Any>> {
         override fun set(location: MutableList<Any>, target: String, value: MultipartFile): Any? {
             return location.set(Integer.parseInt(target), value)
         }

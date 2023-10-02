@@ -55,7 +55,9 @@ class WebsocketGraphQLTransportWSProtocolHandler(private val dgsReactiveQueryExe
             Mono.defer {
                 if (connections[webSocketSession.id] == false) {
                     webSocketSession.close(CloseStatus(CloseCode.ConnectionInitialisationTimeout.code, "Did not receive a ConnectionInitMessage"))
-                } else Mono.empty()
+                } else {
+                    Mono.empty()
+                }
             }
         )
             .subscribe()

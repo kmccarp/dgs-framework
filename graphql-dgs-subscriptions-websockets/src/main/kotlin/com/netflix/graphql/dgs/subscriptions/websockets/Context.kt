@@ -37,7 +37,7 @@ internal class Context<T>(
     var acknowledged: Boolean = false
 
     /** The parameters passed during the connection initialisation. */
-    var connectionParams: Map<String, Any>? = null
+    var connectionParams: Map<String, Any>?
 
     /**
      * Holds the active subscriptions for this context. **All operations**
