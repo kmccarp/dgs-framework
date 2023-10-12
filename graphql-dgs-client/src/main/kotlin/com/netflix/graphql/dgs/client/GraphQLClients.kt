@@ -28,7 +28,9 @@ internal object GraphQLClients {
     internal val objectMapper: ObjectMapper =
         if (ClassUtils.isPresent("com.fasterxml.jackson.module.kotlin.KotlinModule\$Builder", this::class.java.classLoader)) {
             ObjectMapper().registerModule(KotlinModule.Builder().nullIsSameAsDefault(true).build())
-        } else ObjectMapper().registerKotlinModule()
+        } else {
+            ObjectMapper().registerKotlinModule()
+        }
 
     internal val defaultHeaders: HttpHeaders = HttpHeaders.readOnlyHttpHeaders(
         HttpHeaders().apply {

@@ -151,7 +151,10 @@ class DgsSchemaProvider(
     private fun computeSchema(schema: String? = null, fieldVisibility: GraphqlFieldVisibility): GraphQLSchema {
         val startTime = System.currentTimeMillis()
         val dgsComponents = applicationContext.getBeansWithAnnotation<DgsComponent>().values.let { beans ->
-            if (componentFilter != null) beans.filter(componentFilter) else beans
+            if (componentFilter != null) {
+                beans.filter(componentFilter)
+            } else { beans
+            }
         }
 
         var mergedRegistry = if (schema == null) {
@@ -347,7 +350,8 @@ class DgsSchemaProvider(
             val dgsEnableDataFetcherInstrumentation =
                 method.getAnnotation(DgsEnableDataFetcherInstrumentation::class.java)
             dgsEnableDataFetcherInstrumentation.value
-        } else true
+        } else { true
+        }
         dataFetcherMetricsInstrumentationEnabled["$parentType.$field"] = enableMetricsInstrumentation
 
         val methodClassName = method.declaringClass.name

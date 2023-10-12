@@ -128,7 +128,9 @@ class DataFetcherInvoker internal constructor(
 
     private fun formatArgumentError(param: MethodParameter, message: String): String {
         return "Could not resolve parameter [${param.parameterIndex}] in " +
-            param.executable.toGenericString() + if (message.isNotEmpty()) ": $message" else ""
+            param.executable.toGenericString() + if (message.isNotEmpty()) { ": $message"
+        } else { ""
+        }
     }
 
     /**

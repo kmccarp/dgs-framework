@@ -32,7 +32,11 @@ class MockGraphQLVisitor(private val mockConfig: Map<String, Any?>, private val 
         val pathForNode = getPathForNode(context?.parentNodes, node)
 
         if (mockConfig.keys.any { pathForNode?.startsWith(it) == true } && !providedRoots.any { pathForNode?.startsWith(it!!) == true && pathForNode.count { c -> c == '.' } != it?.count { c -> c == '.' } }) {
-            val type = if (node?.type is GraphQLNonNull) (node.type as GraphQLNonNull).wrappedType else node?.type
+            val type = if (node?.type is GraphQLNonNull) {
+                (node.type as GraphQLNonNull).wrappedType
+            } else {
+                node?.type
+            }
 
             val dataFetcher: DataFetcher<*> = if (mockConfig[pathForNode] != null) {
                 logger.info("Returning provided mock data for {}", pathForNode)

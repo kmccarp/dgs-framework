@@ -25,7 +25,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class DateRangeScalar : Coercing<DateRange, String> {
-    private var formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
+    private var val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
 
     @Throws(CoercingSerializeException::class)
     override fun serialize(dataFetcherResult: Any): String {
