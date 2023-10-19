@@ -40,7 +40,9 @@ open class DefaultDgsReactiveGraphQLContextBuilder(
                 ),
                 dgsRequestData?.serverRequest
             )
-        } else Mono.empty()
+        } else {
+            Mono.empty()
+        }
 
         return Mono.deferContextual { context ->
             customContext.map {

@@ -27,6 +27,7 @@ class WebFluxCookieValueResolver : CookieValueResolver {
         return if (requestData is DgsReactiveRequestData) {
             val cookies: MultiValueMap<String, HttpCookie>? = requestData.serverRequest?.cookies()
             cookies?.getFirst(name)?.value
-        } else null
+        } else { null
+        }
     }
 }

@@ -28,6 +28,7 @@ class ServletCookieValueResolver : CookieValueResolver {
         return if (requestData is DgsWebMvcRequestData) {
             val webRequest = requestData.webRequest as ServletWebRequest
             WebUtils.getCookie(webRequest.request, name)?.value
-        } else null
+        } else { null
+        }
     }
 }
